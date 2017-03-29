@@ -1,0 +1,10 @@
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    height: 200px;
+    width: 500px;
+}
+
+.dataElementTableContainer {
+    margin-top: 20px;
+}
