@@ -1,0 +1,27 @@
+<metadata>
+    <constants>
+        <constant code="excel-importer-template" name="excel-importer-template" id="exiconstant" shortName="excel-importer-template">
+            <displayDescription>excel-importer-template</displayDescription>
+            <displayName>excel-importer-template</displayName>
+            <publicAccess>rw------</publicAccess>
+            <description>excel-importer-template</description>
+            <displayShortName>excel-importer-template</displayShortName>
+            <externalAccess>false</externalAccess>
+            <value>0.0</value>
+            <access>
+                <read>true</read>
+                <update>true</update>
+                <externalize>false</externalize>
+                <delete>true</delete>
+                <write>true</write>
+                <manage>true</manage>
+            </access>
+            <attributeValues>
+                <attributeValue>
+                    <value>{}</value>
+                    <attribute id="eiattribute"/>
+                </attributeValue>
+            </attributeValues>
+        </constant>
+    </constants>
+</metadata>

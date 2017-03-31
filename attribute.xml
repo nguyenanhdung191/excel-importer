@@ -1,0 +1,44 @@
+<metadata>
+    <attributes>
+        <attribute id="eiattribute" name="templates" code="templates">
+            <indicatorAttribute>false</indicatorAttribute>
+            <indicatorGroupAttribute>false</indicatorGroupAttribute>
+            <userGroupAttribute>false</userGroupAttribute>
+            <dataElementAttribute>false</dataElementAttribute>
+            <constantAttribute>true</constantAttribute>
+            <valueType>LONG_TEXT</valueType>
+            <categoryOptionAttribute>false</categoryOptionAttribute>
+            <optionSetAttribute>false</optionSetAttribute>
+            <sqlViewAttribute>false</sqlViewAttribute>
+            <legendSetAttribute>false</legendSetAttribute>
+            <trackedEntityAttributeAttribute>false</trackedEntityAttributeAttribute>
+            <organisationUnitAttribute>false</organisationUnitAttribute>
+            <dataSetAttribute>false</dataSetAttribute>
+            <documentAttribute>false</documentAttribute>
+            <unique>false</unique>
+            <dataElementGroupAttribute>false</dataElementGroupAttribute>
+            <sectionAttribute>false</sectionAttribute>
+            <userAttribute>false</userAttribute>
+            <displayName>templates</displayName>
+            <mandatory>false</mandatory>
+            <categoryOptionGroupAttribute>false</categoryOptionGroupAttribute>
+            <trackedEntityAttribute>false</trackedEntityAttribute>
+            <externalAccess>false</externalAccess>
+            <programStageAttribute>false</programStageAttribute>
+            <programAttribute>false</programAttribute>
+            <categoryOptionComboAttribute>false</categoryOptionComboAttribute>
+            <programIndicatorAttribute>false</programIndicatorAttribute>
+            <organisationUnitGroupAttribute>false</organisationUnitGroupAttribute>
+            <organisationUnitGroupSetAttribute>false</organisationUnitGroupSetAttribute>
+            <optionAttribute>false</optionAttribute>
+            <access>
+                <read>true</read>
+                <update>true</update>
+                <externalize>false</externalize>
+                <delete>true</delete>
+                <write>true</write>
+                <manage>false</manage>
+            </access>
+        </attribute>
+    </attributes>
+</metadata>

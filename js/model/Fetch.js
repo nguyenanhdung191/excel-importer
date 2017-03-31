@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import {TEMPLATE_CONSTANT_ID, TEMPLATE_ATTRIBUTE_ID} from "./constants.js";
-const auth = "Basic " + btoa("dung:ABCD1234");
+const auth = "Basic " + btoa("admin:district");
 
 export default class Fetch {
     constructor() {
@@ -9,7 +9,7 @@ export default class Fetch {
 
     getDataSetList() {
         return fetch(
-            "https://dhis2.asia/lao/api/dataSets.json?paging=false",
+            "https://play.dhis2.org/demo/api/dataSets.json?paging=false",
             {
                 headers: {
                     Authorization: auth
@@ -23,7 +23,7 @@ export default class Fetch {
 
     getDataELementList() {
         return fetch(
-            "https://dhis2.asia/lao/api/dataElements.json?paging=false&fields=id,name,categoryCombo",
+            "https://play.dhis2.org/demo/api/dataElements.json?paging=false&fields=id,name,categoryCombo",
             {
                 headers: {
                     Authorization: auth
@@ -37,7 +37,7 @@ export default class Fetch {
 
     getDataSetDataElementList() {
         return fetch(
-            `https://dhis2.asia/lao/api/dataElements.json?paging=false&filter=domainType:eq:AGGREGATE&fields=id,name,categoryCombo`,
+            `https://play.dhis2.org/demo/api/dataElements.json?paging=false&filter=domainType:eq:AGGREGATE&fields=id,name,categoryCombo`,
             {
                 headers: {
                     Authorization: auth
@@ -51,7 +51,7 @@ export default class Fetch {
 
     getProgramDataElementList() {
         return fetch(
-            `https://dhis2.asia/lao/api/dataElements.json?paging=false&filter=domainType:eq:TRACKER&fields=id,name,categoryCombo`,
+            `https://play.dhis2.org/demo/api/dataElements.json?paging=false&filter=domainType:eq:TRACKER&fields=id,name,categoryCombo`,
             {
                 headers: {
                     Authorization: auth
@@ -65,7 +65,7 @@ export default class Fetch {
 
     getCategoryOptionCombinationList() {
         return fetch(
-            `https://dhis2.asia/lao/api/categoryCombos.json?paging=false&fields=id,name,categoryOptionCombos[id,name],isDefault`,
+            `https://play.dhis2.org/demo/api/categoryCombos.json?paging=false&fields=id,name,categoryOptionCombos[id,name],isDefault`,
             {
                 headers: {
                     Authorization: auth
@@ -79,7 +79,7 @@ export default class Fetch {
 
     getTemplates() {
         return fetch(
-            `https://192.168.1.17/gdpm/api/constants/Dg3OdoZWoyA.json?fields=attributeValues[value]`,
+            `https://play.dhis2.org/demo/api/constants/${TEMPLATE_CONSTANT_ID}.json?fields=attributeValues[value]`,
             {
                 headers: {
                     Authorization: auth
@@ -105,7 +105,7 @@ export default class Fetch {
             ]
         };
 
-        fetch(`https://192.168.1.17/gdpm/api/constants/${TEMPLATE_CONSTANT_ID}`,
+        fetch(`https://play.dhis2.org/demo/api/constants/${TEMPLATE_CONSTANT_ID}`,
             {
                 method: 'PUT',
                 body: JSON.stringify(object),
@@ -113,7 +113,8 @@ export default class Fetch {
                     Authorization: auth,
                     'Accept': 'application/json',
                     'Content-Type': 'application/json'
-                }
+                },
+                compress: false
             }
         )
             .then(function (res) {

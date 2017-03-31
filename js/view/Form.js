@@ -250,13 +250,11 @@ export default class Form extends React.Component {
     handleSaveTemplate = () => {
         fetch.getTemplates()
             .then(templates => {
-                /*let object = JSON.parse(templates);
+                let object = JSON.parse(templates);
                 object[this.state.templateName] = this.state.mapping;
-                fetch.saveTemplate(object);*/
-                console.log(templates);
+                fetch.saveTemplate(object);
             });
     };
-
 
     render() {
         return (
