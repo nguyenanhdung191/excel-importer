@@ -1,3 +1,5 @@
+let webpack = require("webpack");
+
 module.exports = {
     context: __dirname,
     entry: "./js/index.js",
@@ -15,5 +17,6 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+
 };

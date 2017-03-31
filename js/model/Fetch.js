@@ -1,4 +1,5 @@
 import fetch from "node-fetch";
+import {TEMPLATE_CONSTANT_ID, TEMPLATE_ATTRIBUTE_ID} from "./constants.js";
 const auth = "Basic " + btoa("dung:ABCD1234");
 
 export default class Fetch {
@@ -18,6 +19,20 @@ export default class Fetch {
         )
             .then(result => result.json())
             .then(json => json.dataSets);
+    }
+
+    getDataELementList() {
+        return fetch(
+            "https://dhis2.asia/lao/api/dataElements.json?paging=false&fields=id,name,categoryCombo",
+            {
+                headers: {
+                    Authorization: auth
+                },
+                compress: false
+            }
+        )
+            .then(result => result.json())
+            .then(json => json.dataElements);
     }
 
     getDataSetDataElementList() {
@@ -60,6 +75,52 @@ export default class Fetch {
         )
             .then(result => result.json())
             .then(json => json.categoryCombos);
+    }
+
+    getTemplates() {
+        return fetch(
+            `https://192.168.1.17/gdpm/api/constants/Dg3OdoZWoyA.json?fields=attributeValues[value]`,
+            {
+                headers: {
+                    Authorization: auth
+                },
+                compress: false
+            }
+        )
+            .then(result => result.json())
+            .then(json => json.attributeValues[0].value);
+    }
+
+    saveTemplate(json) {
+        let object = {
+            "name": "excel-importer-template",
+            "value": 0,
+            "attributeValues": [
+                {
+                    "value": JSON.stringify(json),
+                    "attribute": {
+                        "id": TEMPLATE_ATTRIBUTE_ID
+                    }
+                }
+            ]
+        };
+
+        fetch(`https://192.168.1.17/gdpm/api/constants/${TEMPLATE_CONSTANT_ID}`,
+            {
+                method: 'PUT',
+                body: JSON.stringify(object),
+                headers: {
+                    Authorization: auth,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
+            .then(function (res) {
+                return res.json();
+            }).then(function (json) {
+            console.log(json);
+        });
     }
 
 
