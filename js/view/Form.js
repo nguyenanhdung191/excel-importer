@@ -8,7 +8,10 @@ import {fullWhite} from 'material-ui/styles/colors';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import ContentRemove from 'material-ui/svg-icons/content/remove';
 import Fetch from '../model/Fetch.js';
+import Validation from '../model/Validation.js';
+
 const fetch = new Fetch();
+const validation = new Validation();
 
 export default class Form extends React.Component {
 
@@ -248,6 +251,7 @@ export default class Form extends React.Component {
     };
 
     handleSaveTemplate = () => {
+        /*validation.checkTemplate(this.state.templateName, this.state.mapping);*/
         fetch.getTemplates()
             .then(templates => {
                 let object = JSON.parse(templates);
@@ -417,4 +421,4 @@ export default class Form extends React.Component {
             </div>
         );
     }
-}
+};
