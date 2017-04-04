@@ -27,6 +27,7 @@ export default class Form extends React.Component {
             filteredDataElementList: [],
             selectedDataElementList: [],
             templateName: "",
+            programList: [],
             mapping: {
                 orgUnitContainer: "",
                 orgUnitMappingBy: "",
@@ -36,6 +37,9 @@ export default class Form extends React.Component {
                 deContainer: "",
                 deMapping: {},
                 sheetNo: "",
+                eventDateContainer: "",
+                eventDateAddress: "",
+                program: ""
             }
         };
 
@@ -45,6 +49,14 @@ export default class Form extends React.Component {
                     categoryComboList: json
                 });
             });
+
+        fetch.getProgramList()
+            .then(json => {
+                this.setState({
+                    programList: json
+                });
+            })
+
     }
 
     generateDataElementList = json => {
@@ -260,6 +272,7 @@ export default class Form extends React.Component {
             });
     };
 
+
     render() {
         return (
             <div>
@@ -359,6 +372,28 @@ export default class Form extends React.Component {
                         </tr>
                         <tr>
                             <td>
+                                <SelectField floatingLabelText="Event date container"
+                                             onChange={this.handleSelectConfigChange}
+                                             className="mappingSelector"
+                                             value={`${Object.keys(this.state.mapping)[8]}-${this.state.mapping.eventDateContainer}`}>
+                                    <MenuItem value="eventDateContainer-column" primaryText="Column"/>
+                                    <MenuItem value="eventDateContainer-cell" primaryText="Cell"/>
+                                </SelectField>
+                            </td>
+                            <td style={{paddingLeft: 20, paddingRight: 20}}>&rarr;</td>
+                            <td>
+                                <TextField
+                                    inputStyle={{textTransform: "uppercase"}}
+                                    property="eventDateAddress"
+                                    hintText="A1, B, C, D4"
+                                    floatingLabelText="Cell address or column name"
+                                    floatingLabelFixed={true}
+                                    onChange={this.handleTextConfigChange}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
                                 <SelectField floatingLabelText="Read data elements by"
                                              onChange={this.handleSelectConfigChange}
                                              className="mappingSelector"
@@ -398,6 +433,20 @@ export default class Form extends React.Component {
                     }
                 </div>
                 <div>
+                    <SelectField floatingLabelText="Select program"
+                                 onChange={this.handleSelectConfigChange}
+                                 className="mappingSelector"
+                                 value={`${Object.keys(this.state.mapping)[10]}-${this.state.mapping.program}`}>
+                        {
+                            this.state.programList.map(program => {
+                                return (
+                                    <MenuItem key={program.id} value={`program-${program.id}`} primaryText={program.displayName}/>
+                                )
+                            })
+                        }
+                        <MenuItem value="deContainer-column" primaryText="Column"/>
+                        <MenuItem value="deContainer-cell" primaryText="Cell"/>
+                    </SelectField><br/>
                     <TextField
                         property="sheetNo"
                         floatingLabelText="Sheet number"

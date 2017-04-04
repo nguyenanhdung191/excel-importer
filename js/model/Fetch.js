@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import {TEMPLATE_CONSTANT_ID, TEMPLATE_ATTRIBUTE_ID} from "./constants.js";
-const auth = "Basic " + btoa("admin:district");
+const auth = "Basic " + btoa("dung:ABCD1234");
 
 export default class Fetch {
     constructor() {
@@ -9,7 +9,7 @@ export default class Fetch {
 
     getDataSetList() {
         return fetch(
-            "https://play.dhis2.org/demo/api/dataSets.json?paging=false",
+            "https://hispvn.org/gdpm/api/dataSets.json?paging=false",
             {
                 headers: {
                     Authorization: auth
@@ -21,9 +21,23 @@ export default class Fetch {
             .then(json => json.dataSets);
     }
 
+    getProgramList(){
+        return fetch(
+            "https://hispvn.org/gdpm/api/programs.json?paging=false",
+            {
+                headers: {
+                    Authorization: auth
+                },
+                compress: false
+            }
+        )
+            .then(result => result.json())
+            .then(json => json.programs);
+    }
+
     getDataELementList() {
         return fetch(
-            "https://play.dhis2.org/demo/api/dataElements.json?paging=false&fields=id,name,categoryCombo",
+            "https://hispvn.org/gdpm/api/dataElements.json?paging=false&fields=id,name,categoryCombo",
             {
                 headers: {
                     Authorization: auth
@@ -37,7 +51,7 @@ export default class Fetch {
 
     getDataSetDataElementList() {
         return fetch(
-            `https://play.dhis2.org/demo/api/dataElements.json?paging=false&filter=domainType:eq:AGGREGATE&fields=id,name,categoryCombo`,
+            `https://hispvn.org/gdpm/api/dataElements.json?paging=false&filter=domainType:eq:AGGREGATE&fields=id,name,categoryCombo`,
             {
                 headers: {
                     Authorization: auth
@@ -51,7 +65,7 @@ export default class Fetch {
 
     getProgramDataElementList() {
         return fetch(
-            `https://play.dhis2.org/demo/api/dataElements.json?paging=false&filter=domainType:eq:TRACKER&fields=id,name,categoryCombo`,
+            `https://hispvn.org/gdpm/api/dataElements.json?paging=false&filter=domainType:eq:TRACKER&fields=id,name,categoryCombo`,
             {
                 headers: {
                     Authorization: auth
@@ -65,7 +79,7 @@ export default class Fetch {
 
     getCategoryOptionCombinationList() {
         return fetch(
-            `https://play.dhis2.org/demo/api/categoryCombos.json?paging=false&fields=id,name,categoryOptionCombos[id,name],isDefault`,
+            `https://hispvn.org/gdpm/api/categoryCombos.json?paging=false&fields=id,name,categoryOptionCombos[id,name],isDefault`,
             {
                 headers: {
                     Authorization: auth
@@ -79,7 +93,7 @@ export default class Fetch {
 
     getTemplates() {
         return fetch(
-            `https://play.dhis2.org/demo/api/constants/${TEMPLATE_CONSTANT_ID}.json?fields=attributeValues[value]`,
+            `https://hispvn.org/gdpm/api/constants/${TEMPLATE_CONSTANT_ID}.json?fields=attributeValues[value]`,
             {
                 headers: {
                     Authorization: auth
@@ -105,7 +119,7 @@ export default class Fetch {
             ]
         };
 
-        fetch(`https://play.dhis2.org/demo/api/constants/${TEMPLATE_CONSTANT_ID}`,
+        fetch(`https://hispvn.org/gdpm/api/constants/${TEMPLATE_CONSTANT_ID}`,
             {
                 method: 'PUT',
                 body: JSON.stringify(object),
@@ -119,9 +133,8 @@ export default class Fetch {
         )
             .then(function (res) {
                 return res.json();
-            }).then(function (json) {
-            console.log(json);
-        });
+            });
+        ;
     }
 
 
