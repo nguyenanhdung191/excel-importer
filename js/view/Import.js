@@ -99,82 +99,84 @@ export default class Import extends React.Component {
         return (
             <div>
                 <div>
-                    <div><Paper style={{width: 400, height: 200, padding: 10}} zDepth={1}>
-                            <SelectField floatingLabelText="Plese select template"
-                                         value={this.state.selectedTemplateName}
-                                         onChange={this.handleSelectedTemplate}>
-                                {
-                                    Object.keys(this.props.templateList).map(templateName => {
-                                        return (
-                                            <MenuItem key={templateName} value={templateName}
-                                                      primaryText={templateName}/>
-                                        )
-                                    })
-                                }
-                            </SelectField><br/><br/><br/>
-                            <RaisedButton
-                                labelStyle={{fontWeight: "bold"}}
-                                labelColor="#FFFFFF"
-                                backgroundColor="#00adcc"
-                                label="UPLOAD EXCEL FILE"
-                                labelPosition="before"
-                                containerElement="label">
-                                <input type="file"
-                                       accept=".xls,.xlsx"
-                                       onChange={this.handleUploadFile}
-                                       style={{
-                                           cursor: 'pointer',
-                                           position: 'absolute',
-                                           top: 0,
-                                           bottom: 0,
-                                           right: 0,
-                                           left: 0,
-                                           width: '100%',
-                                           opacity: 0,
-                                       }}/>
-                            </RaisedButton>
-                        </Paper></div>
-                    <div><Paper style={{width: 900, height: 200, padding: 10}} zDepth={1}>
-                            <table className="excelFileInfo">
-                                <tbody>
-                                <tr>
-                                    <td><span className="infoTitle">File name:</span> {this.state.excelFile.name}</td>
-                                    <td><span className="infoTitle">File size:</span> {this.state.excelFile.size}</td>
-                                    <td><span
-                                        className="infoTitle">Number of sheets:</span> {this.state.excelFile.noOfSheets}
-                                    </td>
-                                    <td><span
-                                        className="infoTitle">Starting row number:</span> {this.state.excelFile.startingRow}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><span
-                                        className="infoTitle">Org unit address:</span> {this.state.selectedTemplate.orgUnitAddress}
-                                    </td>
-                                    <td><span
-                                        className="infoTitle">Period address:</span> {this.state.selectedTemplate.periodAddress}
-                                    </td>
-                                    <td><span
-                                        className="infoTitle">Event date address:</span> {this.state.selectedTemplate.eventDateAddress}
-                                    </td>
-                                    <td><span
-                                        className="infoTitle">Sheet to import:</span> {this.state.selectedTemplate.sheetNo}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><RaisedButton
-                                        labelStyle={{fontWeight: "bold"}}
-                                        labelColor="#FFFFFF"
-                                        backgroundColor="#00cc44"
-                                        label="START IMPORT"
-                                        labelPosition="before"
-                                        icon={<ImportIcon />}
-                                        onClick={this.handleImportExcel}>
-                                    </RaisedButton></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </Paper></div>
+                    <Paper style={{width: 400, height: 200, padding: 10}} zDepth={1}>
+                        <SelectField floatingLabelText="Plese select template"
+                                     value={this.state.selectedTemplateName}
+                                     onChange={this.handleSelectedTemplate}>
+                            {
+                                Object.keys(this.props.templateList).map(templateName => {
+                                    return (
+                                        <MenuItem key={templateName} value={templateName}
+                                                  primaryText={templateName}/>
+                                    )
+                                })
+                            }
+                        </SelectField><br/><br/><br/>
+                        <RaisedButton
+                            labelStyle={{fontWeight: "bold"}}
+                            labelColor="#FFFFFF"
+                            backgroundColor="#00adcc"
+                            label="UPLOAD EXCEL FILE"
+                            labelPosition="before"
+                            containerElement="label">
+                            <input type="file"
+                                   accept=".xls,.xlsx"
+                                   onChange={this.handleUploadFile}
+                                   style={{
+                                       cursor: 'pointer',
+                                       position: 'absolute',
+                                       top: 0,
+                                       bottom: 0,
+                                       right: 0,
+                                       left: 0,
+                                       width: '100%',
+                                       opacity: 0,
+                                   }}/>
+                        </RaisedButton>
+                    </Paper>
+                </div>
+                <div>
+                    <Paper style={{width: 900, height: 200, padding: 10}} zDepth={1}>
+                        <table className="excelFileInfo">
+                            <tbody>
+                            <tr>
+                                <td><span className="infoTitle">File name:</span> {this.state.excelFile.name}</td>
+                                <td><span className="infoTitle">File size:</span> {this.state.excelFile.size}</td>
+                                <td><span
+                                    className="infoTitle">Number of sheets:</span> {this.state.excelFile.noOfSheets}
+                                </td>
+                                <td><span
+                                    className="infoTitle">Starting row number:</span> {this.state.excelFile.startingRow}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span
+                                    className="infoTitle">Org unit address:</span> {this.state.selectedTemplate.orgUnitAddress}
+                                </td>
+                                <td><span
+                                    className="infoTitle">Period address:</span> {this.state.selectedTemplate.periodAddress}
+                                </td>
+                                <td><span
+                                    className="infoTitle">Event date address:</span> {this.state.selectedTemplate.eventDateAddress}
+                                </td>
+                                <td><span
+                                    className="infoTitle">Sheet to import:</span> {this.state.selectedTemplate.sheetNo}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><RaisedButton
+                                    labelStyle={{fontWeight: "bold"}}
+                                    labelColor="#FFFFFF"
+                                    backgroundColor="#00cc44"
+                                    label="START IMPORT"
+                                    labelPosition="before"
+                                    icon={<ImportIcon />}
+                                    onClick={this.handleImportExcel}>
+                                </RaisedButton></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </Paper>
                 </div>
                 <div>
                     <Paper style={{width: 400, padding: 10}} zDepth={1}>
