@@ -39,7 +39,8 @@ export default class Form extends React.Component {
                 sheetNo: "",
                 eventDateContainer: "",
                 eventDateAddress: "",
-                program: ""
+                program: "",
+                domainType: ""
             }
         };
 
@@ -88,13 +89,16 @@ export default class Form extends React.Component {
     };
 
     handleDomainType = (event, index, value) => {
+        let mapping = this.state.mapping;
+        mapping.domainType = value;
         this.setState({
             loading: "loading",
             domainType: value,
             dataElementList: [],
             currentSelectedAvailableDataElement: [],
             filteredDataElementList: [],
-            selectedDataElementList: []
+            selectedDataElementList: [],
+            mapping: mapping
         });
 
         if (value === "aggregate") {
@@ -440,12 +444,11 @@ export default class Form extends React.Component {
                         {
                             this.state.programList.map(program => {
                                 return (
-                                    <MenuItem key={program.id} value={`program-${program.id}`} primaryText={program.displayName}/>
+                                    <MenuItem key={program.id} value={`program-${program.id}`}
+                                              primaryText={program.displayName}/>
                                 )
                             })
                         }
-                        <MenuItem value="deContainer-column" primaryText="Column"/>
-                        <MenuItem value="deContainer-cell" primaryText="Cell"/>
                     </SelectField><br/>
                     <TextField
                         property="sheetNo"

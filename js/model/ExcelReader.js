@@ -22,7 +22,7 @@ export default class ExcelReader {
             reader.onload = e => {
                 let data = e.target.result;
                 let arr = current.fixdata(data);
-                workbook = xlsx.read(btoa(arr), {type: 'base64'});
+                workbook = xlsx.read(btoa(arr), {type: 'base64', cellDates: true});
                 resolve(workbook);
             }
         });
