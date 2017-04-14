@@ -30,7 +30,7 @@ export default class DataGeneration {
             Object.keys(template.deMapping).forEach(de_coc => {
                 let de = de_coc.split("-")[0];
                 let address = template.deMapping[de_coc];
-                let value = sheet[address + i].v + "";
+                let value = (sheet[address + i].t === "d") ? moment(sheet[address + i].v).format("YYYY-MM-DD") : sheet[address + i].v + "";
                 event.dataValues.push({
                     dataElement: de,
                     value: value
@@ -64,7 +64,7 @@ export default class DataGeneration {
                     dataElement: "",
                     categoryOptionCombo: "",
                     value: "",
-                    orgUnit: "tttttttty",
+                    orgUnit: orgUnit,
                     period: period
                 };
                 let de = de_coc.split("-")[0];
@@ -76,7 +76,6 @@ export default class DataGeneration {
                 dataValue.value = value;
                 dataValues.dataValues.push(dataValue);
             });
-
         }
         return dataValues;
     }

@@ -4,11 +4,13 @@ import MenuItem from "material-ui/MenuItem";
 import Paper from "material-ui/Paper";
 import RaisedButton from "material-ui/RaisedButton"
 import ImportIcon from "material-ui/svg-icons/file/file-upload";
+import moment from "moment";
 import ImportSummary from "./ImportSummary";
 import ExcelReader from "../model/ExcelReader";
 import Ultility from "../model/Ultility";
 import DataGeneration from  "../model/DataGeneration";
 import SendData from "../model/SendData";
+import ImportError from "./ImportError";
 
 const excelHandler = new ExcelReader();
 const ultility = new Ultility();
@@ -28,7 +30,15 @@ export default class Import extends React.Component {
                 noOfSheets: 0,
                 workbook: {},
                 startingRow: 0
-            }
+            },
+            importSummary: {
+                importCount: {
+                    imported: 0,
+                    updated: 0,
+                    ignored: 0
+                }
+            },
+            importTime: ""
         }
     }
 
@@ -40,6 +50,9 @@ export default class Import extends React.Component {
     };
 
     handleUploadFile = (event) => {
+        if (event.target.value === "") {
+            return;
+        }
         let fileName = event.target.files[0].name;
         let fileExtension = fileName.split(".").pop();
         let fileSize = event.target.files[0].size;
@@ -60,6 +73,7 @@ export default class Import extends React.Component {
                     this.setState({
                         excelFile: object
                     });
+                    document.getElementById("excelFileInput").value = "";
                 });
         }
         else {
@@ -73,7 +87,7 @@ export default class Import extends React.Component {
                     workbook: {},
                     startingRow: 0
                 }
-            })
+            });
         }
     };
 
@@ -85,11 +99,34 @@ export default class Import extends React.Component {
             alert("Please upload excel file")
         } else {
             if (this.state.selectedTemplate.domainType === "event") {
-                dataGeneration.createEvents(this.state);
+                sendData.sendEvents(dataGeneration.createEvents(this.state), this.state.selectedTemplate.orgUnitMappingBy)
+                    .then(summary => {
+                        this.setState({
+                            importSummary: summary,
+                            importTime: moment().format("YYYY-MM-DD HH:MM:SS"),
+                            excelFile: {
+                                name: "",
+                                size: 0,
+                                noOfSheets: 0,
+                                workbook: {},
+                                startingRow: 0
+                            }
+                        });
+                    });
             }
             else {
-                console.log(this.state);
-                sendData.sendDataValues(dataGeneration.createDataValues(this.state), this.state.selectedTemplate.orgUnitMappingBy);
+                sendData.sendDataValues(dataGeneration.createDataValues(this.state), this.state.selectedTemplate.orgUnitMappingBy)
+                    .then(summary => this.setState({
+                        importSummary: summary,
+                        importTime: moment().format("YYYY-MM-DD HH:MM:SS"),
+                        excelFile: {
+                            name: "",
+                            size: 0,
+                            noOfSheets: 0,
+                            workbook: {},
+                            startingRow: 0
+                        }
+                    }));
             }
         }
     };
@@ -98,7 +135,7 @@ export default class Import extends React.Component {
     render() {
         return (
             <div>
-                <div>
+                <div style={{float: "left", marginRight: 10, marginBottom: 10}}>
                     <Paper style={{width: 400, height: 200, padding: 10}} zDepth={1}>
                         <SelectField floatingLabelText="Plese select template"
                                      value={this.state.selectedTemplateName}
@@ -119,7 +156,8 @@ export default class Import extends React.Component {
                             label="UPLOAD EXCEL FILE"
                             labelPosition="before"
                             containerElement="label">
-                            <input type="file"
+                            <input id="excelFileInput"
+                                   type="file"
                                    accept=".xls,.xlsx"
                                    onChange={this.handleUploadFile}
                                    style={{
@@ -135,7 +173,7 @@ export default class Import extends React.Component {
                         </RaisedButton>
                     </Paper>
                 </div>
-                <div>
+                <div style={{float: "left"}}>
                     <Paper style={{width: 900, height: 200, padding: 10}} zDepth={1}>
                         <table className="excelFileInfo">
                             <tbody>
@@ -178,9 +216,14 @@ export default class Import extends React.Component {
                         </table>
                     </Paper>
                 </div>
-                <div>
-                    <Paper style={{width: 400, padding: 10}} zDepth={1}>
-                        <ImportSummary/>
+                <div style={{clear: "left", float: "left"}}>
+                    <Paper style={{width: 400, padding: 10, height: 250}} zDepth={1}>
+                        <ImportSummary summary={this.state.importSummary} time={this.state.importTime}/>
+                    </Paper>
+                </div>
+                <div style={{float: "left", marginLeft: 10}}>
+                    <Paper style={{width: 900, padding: 10, minHeight: 250}} zDepth={1}>
+                        <ImportError summary={this.state.importSummary}/>
                     </Paper>
                 </div>
             </div>
