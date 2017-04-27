@@ -279,7 +279,7 @@ export default class Form extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="content">
                 <div>
                     <SelectField floatingLabelText="Please select domain type" value={this.state.domainType}
                                  onChange={this.handleDomainType}>

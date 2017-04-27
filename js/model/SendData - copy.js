@@ -1,7 +1,5 @@
 import fetch from "node-fetch";
-//const api = window.location.href.slice(0, window.location.href.indexOf("api")) + "api";
-const api = "https://hispvn.org/gdpm/api";
-const auth = "Basic " + btoa("thai:ABCD1234");
+const auth = "Basic " + btoa("nghia:ABCD1234");
 
 
 export default class SendData {
@@ -10,7 +8,7 @@ export default class SendData {
     }
 
     sendDataValues(dataValues, ouScheme) {
-        return fetch(`${api}/dataValueSets?orgUnitIdScheme=${ouScheme}&dryRun=true`,
+        return fetch(`../api/dataValueSets?orgUnitIdScheme=${ouScheme}&dryRun=true`,
             {
                 method: 'POST',
                 body: JSON.stringify(dataValues),
@@ -27,7 +25,7 @@ export default class SendData {
     }
 
     sendEvents(events, ouScheme) {
-        return fetch(`${api}/events?orgUnitIdScheme=${ouScheme}&dryRun=true`,
+        return fetch(`../api/events?orgUnitIdScheme=${ouScheme}&dryRun=true`,
             {
                 method: 'POST',
                 body: JSON.stringify(events),

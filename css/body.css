@@ -10,8 +10,11 @@ body {
     margin: 0;
 }
 
-.content{
+.content {
     padding: 10px;
+}
+
+.childContent {
 }
 
 /*

@@ -134,9 +134,9 @@ export default class Import extends React.Component {
 
     render() {
         return (
-            <div>
-                <div style={{float: "left", marginRight: 10, marginBottom: 10}}>
-                    <Paper style={{width: 400, height: 200, padding: 10}} zDepth={1}>
+            <div className="content">
+                <div className="childContent" style={{width: "30%", float: "left", marginRight: 10, marginBottom: 10}}>
+                    <Paper style={{width: "100%", height: 200, padding: 10}} zDepth={1}>
                         <SelectField floatingLabelText="Plese select template"
                                      value={this.state.selectedTemplateName}
                                      onChange={this.handleSelectedTemplate}>
@@ -173,8 +173,8 @@ export default class Import extends React.Component {
                         </RaisedButton>
                     </Paper>
                 </div>
-                <div style={{float: "left"}}>
-                    <Paper style={{width: 900, height: 200, padding: 10}} zDepth={1}>
+                <div className="childContent" style={{width: "69%", float: "left"}}>
+                    <Paper style={{width: "100%", height: 200, padding: 10}} zDepth={1}>
                         <table className="excelFileInfo">
                             <tbody>
                             <tr>
@@ -216,13 +216,13 @@ export default class Import extends React.Component {
                         </table>
                     </Paper>
                 </div>
-                <div style={{clear: "left", float: "left"}}>
-                    <Paper style={{width: 400, padding: 10, height: 250}} zDepth={1}>
+                <div className="childContent" style={{width: "30%", clear: "left", float: "left"}}>
+                    <Paper style={{width: "100%", padding: 10, height: 250}} zDepth={1}>
                         <ImportSummary summary={this.state.importSummary} time={this.state.importTime}/>
                     </Paper>
                 </div>
-                <div style={{float: "left", marginLeft: 10}}>
-                    <Paper style={{width: 900, padding: 10, minHeight: 250}} zDepth={1}>
+                <div className="childContent" style={{width: "69%", float: "left", marginLeft: 10}}>
+                    <Paper style={{width: "100%", padding: 10, minHeight: 250}} zDepth={1}>
                         <ImportError summary={this.state.importSummary}/>
                     </Paper>
                 </div>

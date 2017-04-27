@@ -1,12 +1,9 @@
 import React from 'react';
 import {Tabs, Tab} from 'material-ui/Tabs';
-import CreateNew from 'material-ui/svg-icons/content/add-circle';
-import Edit from 'material-ui/svg-icons/editor/mode-edit';
-import ImportExcel from 'material-ui/svg-icons/file/cloud-upload';
-import Instruction from 'material-ui/svg-icons/maps/directions';
 import Form from './Form';
 import Import from './Import';
 import Fetch from "../model/Fetch";
+
 const fetch = new Fetch();
 
 export default class Maintab extends React.Component {
@@ -37,28 +34,19 @@ export default class Maintab extends React.Component {
 
     render() {
         return (
-            <Tabs tabItemContainerStyle={{backgroundColor: "#00cc44", height: 65, fontWeight: "bold"}}
-                  inkBarStyle={{backgroundColor: "red", height: 2}}>
-                <Tab icon={<ImportExcel />} label="IMPORT" style={{fontWeight: "bold"}} onActive={this.handleImportTab}>
-                    <div className="content">
-                        <Import templateList={this.state.templateList}/>
-                    </div>
+            <Tabs tabItemContainerStyle={{backgroundColor: "#e4e4e4"}}
+                  inkBarStyle={{backgroundColor: "orange", height: 2}}>
+                <Tab label="IMPORT" style={{color: "#666666"}}
+                     onActive={this.handleImportTab}>
+                    <Import templateList={this.state.templateList}/>
                 </Tab>
-                <Tab icon={<CreateNew/>} label="CREATE NEW TEMPLATE" style={{fontWeight: "bold"}}>
-                    <div className="content">
-                        <Form/>
-                    </div>
+                <Tab label="CREATE NEW TEMPLATE" style={{color: "#666666"}}>
+                    <Form/>
                 </Tab>
-                <Tab
-                    icon={<Edit />}
-                    label="REMOVE OR EDIT TEMPLATE"
-                    style={{fontWeight: "bold"}}
-                />
-                <Tab
-                    icon={<Instruction />}
-                    label="HOW TO USE"
-                    style={{fontWeight: "bold"}}
-                />
+                <Tab label="REMOVE OR EDIT TEMPLATE" style={{color: "#666666"}}/>
+                <Tab label="HOW TO USE" style={{color: "#666666"}}/>
+                <Tab label="ABOUT" style={{color: "#666666"}}/>
+
             </Tabs>
         );
     }

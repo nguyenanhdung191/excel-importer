@@ -1,11 +1,8 @@
 import fetch from "node-fetch";
 import {TEMPLATE_CONSTANT_ID, TEMPLATE_ATTRIBUTE_ID} from "./constants.js";
 
-//const api = window.location.href.slice(0, window.location.href.indexOf("api")) + "api";
+const auth = "Basic " + btoa("dung:ABCD1234");
 
-
-const auth = "Basic " + btoa("thai:ABCD1234");
-const api = "https://hispvn.org/gdpm/api";
 export default class Fetch {
     constructor() {
 
@@ -13,7 +10,7 @@ export default class Fetch {
 
     getDataSetList() {
         return fetch(
-            `${api}/dataSets.json?paging=false`,
+            "../api/dataSets.json?paging=false",
             {
                 headers: {
                     Authorization: auth
@@ -27,7 +24,7 @@ export default class Fetch {
 
     getProgramList() {
         return fetch(
-            `${api}/programs.json?paging=false`,
+            "../api/programs.json?paging=false",
             {
                 headers: {
                     Authorization: auth
@@ -41,7 +38,7 @@ export default class Fetch {
 
     getDataELementList() {
         return fetch(
-            `${api}/dataElements.json?paging=false&fields=id,name,categoryCombo`,
+            "../api/dataElements.json?paging=false&fields=id,name,categoryCombo",
             {
                 headers: {
                     Authorization: auth
@@ -55,7 +52,7 @@ export default class Fetch {
 
     getDataSetDataElementList() {
         return fetch(
-            `${api}/dataElements.json?paging=false&filter=domainType:eq:AGGREGATE&fields=id,name,categoryCombo`,
+            `../api/dataElements.json?paging=false&filter=domainType:eq:AGGREGATE&fields=id,name,categoryCombo`,
             {
                 headers: {
                     Authorization: auth
@@ -69,7 +66,7 @@ export default class Fetch {
 
     getProgramDataElementList() {
         return fetch(
-            `${api}/dataElements.json?paging=false&filter=domainType:eq:TRACKER&fields=id,name,categoryCombo`,
+            `../api/dataElements.json?paging=false&filter=domainType:eq:TRACKER&fields=id,name,categoryCombo`,
             {
                 headers: {
                     Authorization: auth
@@ -83,7 +80,7 @@ export default class Fetch {
 
     getCategoryOptionCombinationList() {
         return fetch(
-            `${api}/categoryCombos.json?paging=false&fields=id,name,categoryOptionCombos[id,name],isDefault`,
+            `../api/categoryCombos.json?paging=false&fields=id,name,categoryOptionCombos[id,name],isDefault`,
             {
                 headers: {
                     Authorization: auth
@@ -97,7 +94,7 @@ export default class Fetch {
 
     getTemplates() {
         return fetch(
-            `${api}/constants/${TEMPLATE_CONSTANT_ID}.json?fields=attributeValues[value]`,
+            `../api/constants/${TEMPLATE_CONSTANT_ID}.json?fields=attributeValues[value]`,
             {
                 headers: {
                     Authorization: auth
@@ -123,7 +120,7 @@ export default class Fetch {
             ]
         };
 
-        fetch(`${api}/constants/${TEMPLATE_CONSTANT_ID}`,
+        fetch(`../api/constants/${TEMPLATE_CONSTANT_ID}`,
             {
                 method: 'PUT',
                 body: JSON.stringify(object),
